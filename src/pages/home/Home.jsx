@@ -1,13 +1,11 @@
 import React from "react";
-// import "./auth/Login.css";
-import "./dashboard.css";
-import ListItems from "./ListItems";
-// import TodoItem from "./TodoItem";
+import "./home.css";
+import ListItems from "../../components/list_item/ListItems";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiEdit, BiMailSend, BiLogOut } from "react-icons/bi";
 import { Redirect } from "react-router-dom";
 
-class Dashboard extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
 
@@ -373,4 +371,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default Home;

@@ -1,19 +1,11 @@
 import React from "react";
-import {
-  Routes,
-  Route,
-  BrowserRouter,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import Login from "./components/auth/Login";
-import Home from "./components/Home";
-import NoMatch from "./components/no_page/NoMatch";
-import Register from "./components/auth/Register";
-import FinalHome from "./components/Dashboard";
-import EditUser from "./Pages/EditUser";
-import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import NoMatch from "./pages/no_match/NoMatch";
+import Register from "./pages/auth/Register";
+import EditUser from "./pages/edit_user/EditUser";
+import Header from "./components/header/Header";
+import Home from "./pages/home/Home";
 
 class App extends React.Component {
   constructor() {
@@ -68,14 +60,8 @@ class App extends React.Component {
               path={"/home"}
               render={(props) => (
                 <>
-                  {/* <Header
-                    {...props}
-                    // changeloggedInStatus={this.changeloggedInStatus}
-                    loggedInStatus={this.state.loggedInStatus}
-                    userId={this.state.userId}
-                  /> */}
                   <Header />
-                  <Dashboard
+                  <Home
                     {...props}
                     // changeloggedInStatus={this.changeloggedInStatus}
                     loggedInStatus={this.state.loggedInStatus}

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import Home from "./Home";
+
 import "./header.css";
 import { BiLogOut } from "react-icons/bi";
 

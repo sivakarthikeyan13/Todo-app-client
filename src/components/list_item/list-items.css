@@ -2,7 +2,8 @@
   height: 50px;
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  /* align-items: baseline; */
+  align-items: center;
   justify-content: space-between;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
@@ -19,6 +20,22 @@
   position: relative;
   background-color: white;
   border: 1px solid #dbdbdb;
+  color: gray;
+  align-self: center;
+}
+
+.icon:hover {
+  background-color: #ccc;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
   color: gray;
   align-self: center;
 }

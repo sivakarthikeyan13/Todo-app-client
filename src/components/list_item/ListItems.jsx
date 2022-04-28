@@ -9,7 +9,22 @@ function ListItems(props) {
     items.map((item) => {
       return (
         <div className="div-list-item" key={item.id}>
-          <div>
+          <div
+            style={{
+              width: "100px",
+              padding: "5px",
+              margin: "5px",
+            }}
+          >
+            {item.date}
+          </div>
+          <div
+            style={{
+              width: "350px",
+              padding: "5px",
+              margin: "5px",
+            }}
+          >
             <input
               type="checkbox"
               name="isDone"
@@ -34,20 +49,12 @@ function ListItems(props) {
           </div>
 
           <div>
-            <span
-              style={{
-                padding: "5px",
-                margin: "5px",
-              }}
-            >
-              {item.date}
-            </span>
-            <button
-              className="span-delete"
+            <FiX
+              className="icon"
+              size={32}
+              color={"gray"}
               onClick={() => props.deleteItem(item)}
-            >
-              X{/* <FiX size={24} color={"gray"} /> */}
-            </button>
+            />
           </div>
         </div>
       );

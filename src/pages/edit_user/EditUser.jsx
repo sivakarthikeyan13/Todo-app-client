@@ -1,5 +1,4 @@
 import React from "react";
-import "../components/auth/auth.css";
 import "./edituser.css";
 import { Redirect } from "react-router-dom";
 
@@ -109,18 +108,6 @@ class EditUser extends React.Component {
                 onChange={this.handleChange}
                 required
               />
-              <br />
-
-              {/* <button type="submit">Save</button> */}
-            </form>
-
-            {/* <p
-            className="auth-text"
-            style={{ fontSize: "large", fontWeight: "400" }}
-          >
-            Change Password
-          </p> */}
-            <form onSubmit={this.handleSubmit}>
               <input
                 type="password"
                 name="oldPassword"
@@ -145,7 +132,6 @@ class EditUser extends React.Component {
                 onChange={this.handleChange}
                 required
               />
-              <br />
               <button type="submit">Change</button>
             </form>
             <p className="error-text">{this.state.editUserError}</p>
