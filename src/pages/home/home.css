@@ -1,23 +1,17 @@
 .div-finaltask {
   width: 400px;
   height: 150px;
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-content: flex-start; */
   margin: 20px 20px;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
   padding: 20px;
   margin-top: 10vh;
   background-color: white;
-  /* position: fixed; */
 }
 
 .div-list {
   width: 550px;
   max-height: 850px;
-  /* display: flex;
-  flex-direction: column; */
   justify-content: space-evenly;
   margin: 20px 20px;
   border: 1px solid #dbdbdb;
@@ -44,13 +38,6 @@
   font-weight: 800;
 }
 
-/* .form-finaltask {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  float: left;
-} */
-
 .form-input {
   margin: 5px;
   padding: 2px;
@@ -71,25 +58,18 @@
   background-color: rgb(236, 192, 70);
 }
 
-/* input {
-  width: 95%;
-  border: 1px solid #dbdbdb;
-  padding: 5px;
-  margin: 2px 0;
-  border-radius: 5px;
-  background-color: #fafafa;
-  box-shadow: none;
-  font-family: "Roboto", sans-serif;
+.icon-home:hover {
+  background-color: #ccc;
+  color: gray;
 }
 
-button {
-  width: 100%;
-  margin: 5px 0;
-  border: none;
+.icon-home {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  align-items: center;
+  background-color: white;
   border-radius: 5px;
-  background-color: dodgerblue;
-  font-family: "Roboto", sans-serif;
-  color: white;
-  padding: 5px;
-  font-weight: 600;
-} */
+
+  align-self: center;
+}

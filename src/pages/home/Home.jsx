@@ -72,7 +72,7 @@ class Home extends React.Component {
   handleSubmit(event) {
     console.log("state date", this.state.date);
     const { userId, taskName, isDone, date, description } = this.state;
-    const res = fetch("http://localhost:8080/api/todoItems", {
+    fetch("http://localhost:8080/api/todoItems", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,9 +117,25 @@ class Home extends React.Component {
       taskName: "",
       isDone: false,
       date: "",
-
       addTaskErrors: "",
     });
+  }
+
+  handleSendMail(event) {
+    fetch(
+      "http://localhost:8080/api/sendEmail/" + localStorage.getItem("userId"),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: localStorage.getItem("userEmail"),
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("mail response", response);
+      });
   }
 
   handleDoneClick(id, userId, task, isDone, date) {
@@ -202,9 +218,11 @@ class Home extends React.Component {
       return (
         <div
           style={{
+            // height: "100%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
+            // overflow: "hidden",
           }}
         >
           <div>
@@ -258,9 +276,9 @@ class Home extends React.Component {
                 <span className="div-finaltask-text">Details</span>
 
                 <BiMailSend
-                  style={{ cursor: "pointer" }}
+                  className="icon-home"
                   size={28}
-                  onClick={this.handleEditClick}
+                  onClick={this.handleSendMail}
                 />
               </div>
 
@@ -318,13 +336,14 @@ class Home extends React.Component {
                 <span className="div-finaltask-text">Profile</span>
                 <div>
                   <BiEdit
-                    style={{ cursor: "pointer" }}
+                    className="icon-home"
                     size={28}
                     onClick={this.handleEditClick}
                   />
 
                   <BiLogOut
-                    style={{ cursor: "pointer", marginLeft: "20px" }}
+                    className="icon-home"
+                    style={{ marginLeft: "20px" }}
                     size={28}
                     onClick={() => {
                       localStorage.clear();

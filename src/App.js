@@ -73,10 +73,10 @@ class App extends React.Component {
             <Route
               exact
               path={"/register"}
-              render={() => (
+              render={(props) => (
                 <>
                   <Header />
-                  <Register />
+                  <Register {...props} />
                 </>
               )}
             />
