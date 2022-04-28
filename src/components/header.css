@@ -1,7 +1,8 @@
 nav {
   height: 50px;
-  border: 1px solid #dfdfdf;
-  background-color: white;
+  border: 1px solid rgb(228, 183, 91);
+  border-radius: 5px;
+  background-color: rgb(228, 183, 91);
   position: fixed;
   top: 0;
   width: 100%;
@@ -14,6 +15,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-content: center;
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
@@ -22,8 +24,10 @@ nav {
 
 .div-text {
   font-size: xx-large;
-  font-family: "Roboto", sans-serif;
+  font-family: "Dancing Script", cursive;
+  color: white;
   font-weight: 900;
+  margin: 0 auto;
 }
 
 .div-navbar {

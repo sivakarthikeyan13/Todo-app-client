@@ -4,11 +4,11 @@ import Home from "./Home";
 import "./header.css";
 import { BiLogOut } from "react-icons/bi";
 
-const Header = (props) => {
+const Header = () => {
   return (
     <nav>
       <div className="div-header">
-        <div className="div-text">ToDo List</div>
+        <p className="div-text">ToDo List</p>
         {/* <div className="div-navbar">
           <BiLogOut
             // className="button-header"

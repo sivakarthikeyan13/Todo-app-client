@@ -5,10 +5,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import EditUser from "./Pages/EditUser";
+import Header from "./components/Header";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <EditUser /> */}
     <App />
   </React.StrictMode>,
   document.getElementById("root")

@@ -68,12 +68,13 @@ class App extends React.Component {
               path={"/home"}
               render={(props) => (
                 <>
-                  <Header
+                  {/* <Header
                     {...props}
                     // changeloggedInStatus={this.changeloggedInStatus}
                     loggedInStatus={this.state.loggedInStatus}
                     userId={this.state.userId}
-                  />
+                  /> */}
+                  <Header />
                   <Dashboard
                     {...props}
                     // changeloggedInStatus={this.changeloggedInStatus}
@@ -83,18 +84,30 @@ class App extends React.Component {
               )}
             />
 
-            <Route exact path={"/register"} component={Register} />
+            <Route
+              exact
+              path={"/register"}
+              render={() => (
+                <>
+                  <Header />
+                  <Register />
+                </>
+              )}
+            />
 
             <Route
               exact
               path={"/edit-profile"}
               render={(props) => (
-                <EditUser
-                  {...props}
-                  // changeloggedInStatus={this.changeloggedInStatus}
-                  loggedInStatus={this.state.loggedInStatus}
-                  userId={this.state.userId}
-                />
+                <>
+                  <Header />
+                  <EditUser
+                    {...props}
+                    // changeloggedInStatus={this.changeloggedInStatus}
+                    loggedInStatus={this.state.loggedInStatus}
+                    userId={this.state.userId}
+                  />
+                </>
               )}
             />
             <Route path="*" component={NoMatch} />

@@ -318,21 +318,22 @@ class Dashboard extends React.Component {
                 }}
               >
                 <span className="div-finaltask-text">Profile</span>
+                <div>
+                  <BiEdit
+                    style={{ cursor: "pointer" }}
+                    size={28}
+                    onClick={this.handleEditClick}
+                  />
 
-                <BiEdit
-                  style={{ cursor: "pointer" }}
-                  size={28}
-                  onClick={this.handleEditClick}
-                />
-
-                <BiLogOut
-                  style={{ cursor: "pointer" }}
-                  size={28}
-                  onClick={() => {
-                    localStorage.clear();
-                    this.props.history.replace("/");
-                  }}
-                />
+                  <BiLogOut
+                    style={{ cursor: "pointer", marginLeft: "20px" }}
+                    size={28}
+                    onClick={() => {
+                      localStorage.clear();
+                      this.props.history.replace("/");
+                    }}
+                  />
+                </div>
               </div>
 
               <p
