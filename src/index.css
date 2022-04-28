@@ -1,21 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@100;300;400;700&display=swap");
+
 body {
   margin: 0;
   font-family: "Roboto", "san-serif";
   padding: 0;
   height: 100vh;
   background-color: #fafafa;
-  /* background-color: #424242; */
+  /* background-color: #121212; */
 }
 
 input {
   width: 95%;
   height: 30px;
   border: 1px solid #dbdbdb;
+  /* border: 1px solid #444444; */
   padding: 5px;
   margin: 2px 0;
   border-radius: 5px;
   background-color: #fafafa;
+  /* background-color: #3a3b3c; */
   box-shadow: none;
   font-family: "Roboto", sans-serif;
 }

@@ -54,8 +54,8 @@ class EditUser extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         if (response.errorMessage) {
-          this.setState({ editUserError: response.message });
-          console.log("edituser error: ", this.state.editUserError);
+          this.setState({ editUserError: response.errorMessage });
+          console.log("edituser error: ", response.errorMessage);
         } else {
           console.log("User updated successfully...");
           //change user credials in local-storage
@@ -117,6 +117,7 @@ class EditUser extends React.Component {
                 type="password"
                 name="oldPassword"
                 placeholder="Old Password..."
+                minLength="6"
                 value={this.state.oldPassword}
                 onChange={this.handleChange}
                 required
@@ -125,6 +126,7 @@ class EditUser extends React.Component {
                 type="password"
                 name="password"
                 placeholder="New Password..."
+                minLength="6"
                 value={this.state.password}
                 onChange={this.handleChange}
                 required
@@ -133,6 +135,7 @@ class EditUser extends React.Component {
                 type="password"
                 name="passwordConfirmation"
                 placeholder="Confirm New Password..."
+                minLength="6"
                 value={this.state.passwordConfirmation}
                 onChange={this.handleChange}
                 required

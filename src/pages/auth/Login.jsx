@@ -94,6 +94,7 @@ class Login extends React.Component {
             type="password"
             name="password"
             placeholder="Password..."
+            minLength="6"
             value={this.state.password}
             onChange={this.handleChange}
             required

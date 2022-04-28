@@ -105,6 +105,7 @@ class Register extends React.Component {
             type="password"
             name="password"
             placeholder="Password..."
+            minLength="6"
             value={this.state.password}
             onChange={this.handleChange}
             required
@@ -113,6 +114,7 @@ class Register extends React.Component {
             type="password"
             name="passwordConfirmation"
             placeholder="Confirm Password..."
+            minLength="6"
             value={this.state.passwordConfirmation}
             onChange={this.handleChange}
             required
