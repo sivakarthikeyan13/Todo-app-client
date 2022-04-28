@@ -1,0 +1,33 @@
+nav {
+  height: 50px;
+  border: 1px solid #dfdfdf;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.div-header {
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 5px;
+}
+
+.div-text {
+  font-size: xx-large;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+.div-navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

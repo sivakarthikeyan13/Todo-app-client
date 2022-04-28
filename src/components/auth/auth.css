@@ -1,0 +1,29 @@
+.div-auth {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 10vh;
+  align-self: center;
+  background-color: white;
+}
+
+.auth-text {
+  font-size: xx-large;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.error-text {
+  font-size: "medium";
+  margin: "0 0";
+  padding-left: "3px";
+  color: red;
+  font-weight: 300;
+}
