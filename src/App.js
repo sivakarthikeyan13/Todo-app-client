@@ -16,6 +16,7 @@ class App extends React.Component {
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.changeloggedInStatus = this.changeloggedInStatus.bind(this);
   }
 
   handleLogin(userData) {
@@ -63,7 +64,7 @@ class App extends React.Component {
                   <Header />
                   <Home
                     {...props}
-                    // changeloggedInStatus={this.changeloggedInStatus}
+                    changeloggedInStatus={this.changeloggedInStatus}
                     loggedInStatus={this.state.loggedInStatus}
                   />
                 </>

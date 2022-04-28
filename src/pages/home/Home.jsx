@@ -382,6 +382,7 @@ class Home extends React.Component {
                       );
                       if (confirmBox === true) {
                         localStorage.clear();
+                        this.props.changeloggedInStatus();
                         this.props.history.replace("/");
                       }
                     }}

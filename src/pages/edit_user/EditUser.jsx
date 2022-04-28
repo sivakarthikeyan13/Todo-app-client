@@ -28,7 +28,7 @@ class EditUser extends React.Component {
 
   handleSuccessfulSubmit() {
     //redirecting to home screen
-    this.props.history.push("/home");
+    this.props.history.replace("/home");
   }
 
   handleSubmit(event) {
