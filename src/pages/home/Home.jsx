@@ -28,20 +28,14 @@ class Home extends React.Component {
     this.handleEditClick = this.handleEditClick.bind(this);
   }
 
+  //fetch todo list after mount
   async componentDidMount() {
     const resp = await fetch(
       "http://localhost:8080/api/todoItems/" + localStorage.getItem("userId")
     );
     const feeds = await resp.json();
     this.setState({ feeds });
-    console.log("length", this.state.feeds.length);
 
-    console.log(
-      "today",
-      new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .split("T")[0]
-    );
     let todayTasks = 0;
     feeds.map((item) => {
       if (
@@ -65,12 +59,13 @@ class Home extends React.Component {
     });
   }
 
+  //set date state
   handleDate = (date) => {
     this.setState({ date: date.target.value });
   };
 
   handleSubmit(event) {
-    console.log("state date", this.state.date);
+    console.log("Calling create-task api...");
     const { userId, taskName, isDone, date, description } = this.state;
     fetch("http://localhost:8080/api/todoItems", {
       method: "POST",
@@ -86,9 +81,16 @@ class Home extends React.Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("add response", response);
+        // console.log("add response", response);
+        console.log("New Task added successfully...");
+
+        //add new item to list
         const newItems = [...this.state.feeds, response];
+
+        // update total tasks count
         const newLen = this.state.length + 1;
+
+        //check for today's task and update count
         if (
           response.date ==
           new Date(
@@ -99,6 +101,8 @@ class Home extends React.Component {
         ) {
           this.setState({ todayTasks: this.state.todayTasks + 1 });
         }
+
+        // set states to update Details counter
         this.setState({
           feeds: newItems,
           length: newLen,
@@ -108,11 +112,15 @@ class Home extends React.Component {
         console.log("registration error", error);
       });
 
+    //prevent page refresh after submit
     event.preventDefault();
 
+    //clear input fields after submit
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
     );
+
+    //clear states after submit
     this.setState({
       taskName: "",
       isDone: false,
@@ -121,7 +129,8 @@ class Home extends React.Component {
     });
   }
 
-  handleSendMail(event) {
+  handleSendMail() {
+    console.log("Calling send-email api...");
     fetch(
       "http://localhost:8080/api/sendEmail/" + localStorage.getItem("userId"),
       {
@@ -135,11 +144,14 @@ class Home extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         console.log("mail response", response);
+      })
+      .catch((error) => {
+        console.log("Email sender error", error);
       });
   }
 
   handleDoneClick(id, userId, task, isDone, date) {
-    console.log("date", date);
+    console.log("Calling update-task api...");
     const res = fetch("http://localhost:8080/api/todoItems/" + id, {
       method: "PUT",
       headers: {
@@ -154,53 +166,62 @@ class Home extends React.Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("Item done response", response);
-        //   this.setState({
-        //     [event.target.name]: response.isDone,
-        //   });
+        console.log("Item updated successfully");
+        console.log("Item response", response);
         const filterItems = this.state.feeds;
-        console.log(filterItems);
+        //update item checkbox
         filterItems.map((item) => {
           if (item.id === id) {
             item.isDone = !isDone;
           }
+          //set isDone state
           this.setState({
             feeds: [...filterItems],
           });
         });
-        console.log("after change in state", filterItems);
       })
       .catch((error) => {
-        console.log("item done error", error);
+        console.log("item update error", error);
       });
   }
 
   handleDeleteClick(delItem) {
-    const res = fetch("http://localhost:8080/api/todoItems/" + delItem.id, {
+    console.log("Calling delete-item api...");
+    fetch("http://localhost:8080/api/todoItems/" + delItem.id, {
       method: "DELETE",
     })
+      .then((response) => response.json())
       .then((response) => {
-        console.log("Item done response", response.json());
-        // this.setState({ id: "" });
-        // this.props.parentCallBack(this.props.id);
-        const filteredItems = this.state.feeds.filter(
-          (item) => item.id !== delItem.id
-        );
-        const newLen = this.state.length - 1;
-        if (
-          delItem.date ==
-          new Date(
-            new Date().getTime() - new Date().getTimezoneOffset() * 60000
-          )
-            .toISOString()
-            .split("T")[0]
-        ) {
-          this.setState({ todayTasks: this.state.todayTasks - 1 });
+        if (response.errorMessage) {
+          console.log("Item Deletion failed- ", response.errorMessage);
+        } else {
+          console.log("Item deleted successfully...");
+          console.log("item delete response: ", response);
+          //filter deleted item
+          const filteredItems = this.state.feeds.filter(
+            (item) => item.id !== delItem.id
+          );
+          //update total tasks count
+          const newLen = this.state.length - 1;
+          //check if today's task is deleted
+          if (
+            delItem.date ==
+            new Date(
+              new Date().getTime() - new Date().getTimezoneOffset() * 60000
+            )
+              .toISOString()
+              .split("T")[0]
+          ) {
+            //update today's tasks counter if deleted
+            this.setState({ todayTasks: this.state.todayTasks - 1 });
+          }
+
+          //set states to update details counter
+          this.setState({
+            feeds: filteredItems,
+            length: newLen,
+          });
         }
-        this.setState({
-          feeds: filteredItems,
-          length: newLen,
-        });
       })
       .catch((error) => {
         console.log("item done error", error);
@@ -208,6 +229,7 @@ class Home extends React.Component {
   }
 
   handleEditClick() {
+    console.log("redirecting to edit-profile page...");
     this.props.history.push("/edit-profile");
   }
 
@@ -278,7 +300,14 @@ class Home extends React.Component {
                 <BiMailSend
                   className="icon-home"
                   size={28}
-                  onClick={this.handleSendMail}
+                  onClick={() => {
+                    const confirmBox = window.confirm(
+                      "Send Today's Tasks to your Mail?"
+                    );
+                    if (confirmBox === true) {
+                      this.handleSendMail();
+                    }
+                  }}
                 />
               </div>
 
@@ -338,7 +367,9 @@ class Home extends React.Component {
                   <BiEdit
                     className="icon-home"
                     size={28}
-                    onClick={this.handleEditClick}
+                    onClick={() => {
+                      this.handleEditClick();
+                    }}
                   />
 
                   <BiLogOut
@@ -346,8 +377,13 @@ class Home extends React.Component {
                     style={{ marginLeft: "20px" }}
                     size={28}
                     onClick={() => {
-                      localStorage.clear();
-                      this.props.history.replace("/");
+                      const confirmBox = window.confirm(
+                        "Are you sure you want to log out?"
+                      );
+                      if (confirmBox === true) {
+                        localStorage.clear();
+                        this.props.history.replace("/");
+                      }
                     }}
                   />
                 </div>

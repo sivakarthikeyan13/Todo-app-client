@@ -26,11 +26,12 @@ class Register extends React.Component {
   }
 
   handleSuccessfulAuth(userData) {
-    // TODO update App component(parent)
+    //direct to login page
     this.props.history.push("/");
   }
 
   handleSubmit(event) {
+    console.log("Calling user-register api...");
     let { name, email, password, passwordConfirmation } = this.state;
     console.log("password", password);
     const res = fetch("http://localhost:8080/api/register", {
@@ -47,22 +48,28 @@ class Register extends React.Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("registration response", response);
+        // console.log("registration response", response);
         if (response.errorMessage) {
+          console.log("User registration failed- ", response.errorMessage);
           this.setState({ registrationError: response.errorMessage });
         } else {
+          console.log("User registered in successfully... ");
           this.handleSuccessfulAuth(response);
         }
       })
       .catch((error) => {
-        console.log("registration error", error);
+        console.log("registration error: ", error);
       });
 
+    //prevent page refresh after submit
     event.preventDefault();
 
+    //clear input fields after submit
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
     );
+
+    //clear states after submit
     this.setState({
       name: "",
       email: "",
@@ -111,6 +118,28 @@ class Register extends React.Component {
             required
           />
           <br />
+          <p
+            style={{
+              fontSize: "small",
+              margin: "0 0",
+              padding: "3px",
+              fontWeight: "300",
+            }}
+          >
+            Existing User?{" "}
+            <span
+              style={{
+                cursor: "pointer",
+                color: "blue",
+                textDecoration: "underLine",
+              }}
+              onClick={() => {
+                this.props.history.push("/");
+              }}
+            >
+              Login
+            </span>
+          </p>
           <button type="submit">Register</button>
         </form>
         <p className="error-text">{this.state.registrationError}</p>

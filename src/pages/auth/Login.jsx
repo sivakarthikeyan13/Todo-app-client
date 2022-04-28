@@ -1,6 +1,6 @@
 import React from "react";
 import "./auth.css";
-import { Navigate, Redirect } from "react-router-dom";
+// import { Navigate, Redirect } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,12 +24,14 @@ class Login extends React.Component {
   }
 
   handleSuccessfulAuth(userData) {
+    //stores user credentials in local-storage
     this.props.handleLogin(userData);
-    // TODO update App component(parent)
+    //direct to home page
     this.props.history.replace("/home");
   }
 
   handleSubmit(event) {
+    console.log("Calling user-login api...");
     const { email, password } = this.state;
     const res = fetch("http://localhost:8080/api/signin", {
       method: "POST",
@@ -44,24 +46,28 @@ class Login extends React.Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("login response", response);
+        // console.log("login response", response);
         if (response.errorMessage) {
+          console.log("User login failed- ", response.errorMessage);
           this.setState({ loginError: response.errorMessage });
         } else {
-          // this.props.navigate("/dashboard");
+          console.log("User logged in successfully... ");
           this.handleSuccessfulAuth(response);
         }
       })
       .catch((error) => {
-        // console.log("login error", error.message);
-        // this.setState({ loginErrors: error.message });
+        console.log("login error: ", error.message);
       });
 
+    //prevent page refresh after submit
     event.preventDefault();
 
+    //clear input fields after submit
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
     );
+
+    //clear states after submit
     this.setState({
       name: "",
       email: "",
@@ -71,7 +77,6 @@ class Login extends React.Component {
   }
 
   render() {
-    // localStorage.setItem("loggedInStatus", false);
     return (
       <div className="div-auth" style={{ height: "300px" }}>
         <p className="auth-text">Login</p>
@@ -113,7 +118,7 @@ class Login extends React.Component {
                 this.props.history.push("/register");
               }}
             >
-              register
+              Register
             </span>
           </p>
           <button type="submit">Login</button>

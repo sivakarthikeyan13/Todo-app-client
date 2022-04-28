@@ -27,14 +27,14 @@ class EditUser extends React.Component {
   }
 
   handleSuccessfulSubmit() {
-    // TODO update App component(parent)
+    //redirecting to home screen
     this.props.history.push("/home");
   }
 
   handleSubmit(event) {
     const { name, email, password, passwordConfirmation, oldPassword } =
       this.state;
-    console.log("password", password);
+    console.log("calling update-user api...");
     const res = fetch(
       "http://localhost:8080/api/user/" + localStorage.getItem("userId"),
       {
@@ -53,14 +53,15 @@ class EditUser extends React.Component {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log("edit user response", response);
-        this.setState({ editUserError: response.message });
-        if (response.message) {
+        if (response.errorMessage) {
           this.setState({ editUserError: response.message });
-          console.log("error edituser", this.state.editUserError);
+          console.log("edituser error: ", this.state.editUserError);
         } else {
+          console.log("User updated successfully...");
+          //change user credials in local-storage
           localStorage.setItem("userName", response.name);
           localStorage.setItem("userEmail", response.email);
+          //redirecting to home screen
           this.handleSuccessfulSubmit();
         }
       })
@@ -68,11 +69,15 @@ class EditUser extends React.Component {
         console.log("registration error", error);
       });
 
+    //prevent page refresh after submit
     event.preventDefault();
 
+    //clear input fields after submit
     Array.from(document.querySelectorAll("input")).forEach(
       (input) => (input.value = "")
     );
+
+    //clear states after submit
     this.setState({
       name: "",
       email: "",
